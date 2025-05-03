@@ -1,0 +1,80 @@
+* {
+    font-family: Inter, Arial, sans-serif;
+    font-size: 12px;
+}
+
+html, body {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+button {
+    display: inline-block;
+    height: 24px;
+    box-sizing: border-box;
+    padding: 2px 12px;
+    border: 1px solid #cecece;
+    background-color: #efefef;
+    color: black;
+    cursor: pointer;
+    white-space: nowrap;
+
+    &:hover {
+        border: 1px solid #7f7f7f;
+        background-color: #e3e3e3;
+        box-shadow: inset 0 0 0 2px white;
+    }
+
+    &:active {
+        background-color: #d7d7d7;
+    }
+
+    &:disabled {
+        background-color: white;
+        color: #7f7f7f;
+        border: 1px solid #cecece;
+        cursor: not-allowed;
+    }
+}
+
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    border: 1px solid #cecece;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: 0 2px 4px #0000001f;
+
+    > div {
+        padding: 8px;
+        background-color: #f7f7f7;
+    }
+
+    > .controls {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+    }
+
+    > .draw-area > canvas {
+        width: 85vw;
+        height: 65vh;
+        background:
+            repeating-linear-gradient(180deg, transparent -1px, #efefef 0px, transparent 1px, transparent 50px),
+            repeating-linear-gradient(90deg, white -1px, #efefef 0px, white 1px, white 50px);
+        border: 1px dashed #cecece;
+        touch-action: none;
+        image-rendering: pixelated;
+    }
+
+    > .curve-area > canvas {
+        width: 85vw;
+        height: 15vh;
+    }
+}

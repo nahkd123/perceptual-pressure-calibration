@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Perceptual Pressure Calibration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+    <script type="importmap"></script>
+    <script src="main.js" type="module" defer></script>
+</head>
+<body>
+    <div class="content">
+        <div class="controls">
+            <button type="button" id="test" disabled>Test</button>
+            <button type="button" id="calibrate">Calibrate</button>
+            <button type="button" id="erase">Erase</button>
+            <button type="button" id="reset">Reset</button>
+            <button type="button" id="export">Export as CSV</button>
+        </div>
+        <div class="draw-area">
+            <canvas id="draw-canvas"></canvas>
+        </div>
+        <div class="curve-area">
+            <canvas id="curve-canvas"></canvas>
+        </div>
+        <div class="credits">
+            Perceptual Pressure Calibration by <a href="https://github/nahkd123">@nahkd123</a>
+        </div>
+    </div>
+</body>
+</html>
