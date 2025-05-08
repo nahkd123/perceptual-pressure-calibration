@@ -9,13 +9,17 @@ resizeObserver.observe(canvas);
 canvas.addEventListener("pointerdown", e => {
     onInput(e);
 
+    const pointerMove = e => {
+        e.getCoalescedEvents().forEach(onInput);
+    };
+
     const pointerUp = e => {
         onInput(e);
-        document.removeEventListener("pointermove", onInput);
+        document.removeEventListener("pointermove", pointerMove);
         document.removeEventListener("pointerup", pointerUp);
     };
 
-    document.addEventListener("pointermove", onInput);
+    document.addEventListener("pointermove", pointerMove);
     document.addEventListener("pointerup", pointerUp);
 });
 
@@ -47,22 +51,23 @@ function onInput(e) {
     };
 
     const size = 30;
-    const radiEnd = currentInput.pressure * size;
     ctx.fillStyle = "black";
-    
+    ctx.globalCompositeOperation = e.buttons & 32 ? "destination-out" : "source-over";
+
     if (!lastInput) {
+        const radiEnd = currentInput.pressure * size;
         ctx.beginPath();
         ctx.moveTo(currentInput.x, currentInput.y);
         ctx.ellipse(currentInput.x, currentInput.y, radiEnd, radiEnd, 0, 0, Math.PI * 2);
         ctx.fill();
     } else {
-        const radiStart = lastInput.pressure * size;
         const spacing = 0.5;
         const length = Math.sqrt((currentInput.x - lastInput.x) ** 2 + (currentInput.y - lastInput.y) ** 2);
-        
+
         for (let d = 0; d <= length; d += spacing) {
             const p = d / length;
-            const radi = radiStart * (1 - p) + radiEnd * p;
+            const pressure = lastInput.pressure * (1 - p) + currentInput.pressure * p;
+            const radi = pressure * size;
             const x = lastInput.x * (1 - p) + currentInput.x * p;
             const y = lastInput.y * (1 - p) + currentInput.y * p;
             ctx.beginPath();
